@@ -2,9 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Restore') {
             steps {
-                echo 'Hello from any agent!'
+                bat 'dotnet restore'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'dotnet build --configuration Release'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'dotnet test'
             }
         }
     }
