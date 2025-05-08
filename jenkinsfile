@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Restore') {
             steps {
-                bat 'dotnet restore'
+                sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'dotnet build --configuration Release'
+                sh 'dotnet build --configuration Release'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'dotnet test'
+                sh 'dotnet test'
             }
         }
     }
