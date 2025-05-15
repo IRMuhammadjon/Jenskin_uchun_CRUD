@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     ports:
-      - "5000:5000"
+      - "5000:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=statsdw;User Id=postgres;Password=123

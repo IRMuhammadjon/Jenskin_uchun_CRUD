@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Port ochish
-EXPOSE 5000
+EXPOSE 80
 
 # Loyihani ishga tushirish
 ENTRYPOINT ["dotnet", "Jenskin_uchun_CRUD.dll"]
