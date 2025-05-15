@@ -21,7 +21,7 @@ namespace Jenskin_uchun_CRUD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mahsulotlar", x => x.Id);
+                    table.PrimaryKey("PK_Mahsulotlar", x => x.Id);   
                 });
         }
 
