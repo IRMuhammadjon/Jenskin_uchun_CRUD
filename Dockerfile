@@ -1,11 +1,7 @@
 # 1. Build bosqichi
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-
-# Barcha fayllarni nusxalash
 COPY . ./
-
-# Loyihani build qilish
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
@@ -13,10 +9,18 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-COPY --from=build /app/out .
+# EF tools uchun kerakli dependency
+RUN apt-get update && apt-get install -y curl
 
-# Port ochish
+# EF toolsni o‘rnatish imkonini berish uchun SDK image kerak bo‘ladi
+# Shuning uchun SDK bazasida ishlaymiz:
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+WORKDIR /app
+COPY --from=build /app/out ./
+COPY entrypoint.sh ./
+RUN chmod +x entrypoint.sh
+
 EXPOSE 80
 
-# Loyihani ishga tushirish
-ENTRYPOINT ["dotnet", "Jenskin_uchun_CRUD.dll"]
+ENTRYPOINT ["./entrypoint.sh"]
