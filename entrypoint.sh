@@ -7,16 +7,7 @@ while ! nc -z db 5432; do
   sleep 2
 done
 
-echo "Ma'lumotlar bazasi tayyor, migratsiyalarni qo'llayapmiz..."
+echo "Migratsiyani bajarish o'tkazib yuboriladi. Chunki runtime image ichida ef tool yo'q."
 
-# EF tool o'rnatish (birinchi marta kerak bo'ladi)
-dotnet tool install --global dotnet-ef
-
-# PATH ga qo'shish
-export PATH="$PATH:/root/.dotnet/tools"
-
-# Migrationni qo‘llash
-dotnet ef database update --project Jenskin_uchun_CRUD.csproj
-
-# Loyihani ishga tushirish
+echo "Web API ishga tushyapti..."
 dotnet Jenskin_uchun_CRUD.dll
